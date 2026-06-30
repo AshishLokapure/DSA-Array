@@ -41,7 +41,7 @@ void bruteForce(vector<int> nums1, vector<int> nums2, int n, int m){
 
 }
 
-void better(vector<int> nums1, vector<int> nums2, int n, int m){
+void optimal1(vector<int> nums1, vector<int> nums2, int n, int m){
     int i = n - 1;
     int j = 0;
 
@@ -54,6 +54,48 @@ void better(vector<int> nums1, vector<int> nums2, int n, int m){
     }
     sort(nums1.begin(), nums1.begin() + n);
     sort(nums2.begin(), nums2.begin() + m);
+
+    for(int i = 0; i < n; i++){
+        cout<<nums1[i]<<" ";
+    }
+    cout<<endl;
+    for(int j = 0; j < m; j++){
+        cout<<nums2[j]<<" ";
+    }
+}
+
+void swapIfGreater(vector<int> &nums1, vector<int> &nums2, int i, int j){
+    if(nums1[i] > nums2[j]){
+        swap(nums1[i], nums2[j]);
+    }
+}
+
+void optimal2(vector<int> nums1, vector<int> nums2, int n, int m){
+    int len = n + m;
+    int gap = (len / 2) + (len % 2);
+
+    while(gap > 0){
+        int i = 0;
+        int j = gap;
+        while(j < len){
+            // nums1, nums2
+            if(i < n && j >= n){
+                swapIfGreater(nums1, nums2, i, j - n);
+            } 
+            // ṇums2
+            else if(i >= n){
+                swapIfGreater(nums2, nums2, i - n, j - n);
+            }
+            // nums1
+            else {
+                swapIfGreater(nums1, nums1, i, j);
+            }
+            i++;
+            j++;
+        }
+        if(gap == 1) break;
+        gap = (gap / 2) + (gap % 2);
+    }
 
     for(int i = 0; i < n; i++){
         cout<<nums1[i]<<" ";
@@ -84,7 +126,10 @@ int main(){
     bruteForce(nums1, nums2, n, m);
     cout<<endl;
 
-    cout<<"better : "<<endl;
-    better(nums1, nums2, n, m);
+    cout<<"Optimal 1 : "<<endl;
+    optimal1(nums1, nums2, n, m);
     cout<<endl;
+
+    cout<<"Optimal 2 : "<<endl;
+    optimal2(nums1, nums2, n, m);
 }
