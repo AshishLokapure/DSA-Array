@@ -1,15 +1,36 @@
 #include<iostream>
 #include<vector>
+#include<map>
 #include<algorithm> 
 using namespace std;
 
-int main(){
+void bruteForce(vector<int> nums, int n){
+    map<int, int> mpp;
+    for(int i = 0; i < n; i++){
+        mpp[nums[i]]++;
+    }
+    int idx = 0;
+    for(auto it : mpp){
+        if(it.second >= 2){
+            for(int i = 0; i < 2; i++){
+                nums[idx++] = it.first;
+            }
+        } else {
+            nums[idx++] = it.first;
+        }
+    }
 
-    vector<int> nums = {0,0,1,1,1,1,2,3,3};
+    cout<<"Elements : "<<idx<<endl;
+    cout<<"Array : ";
+    for(int i = 0; i < n; i++){
+        cout<<nums[i]<<" ";
+    }    
+}
+
+void optimal(vector<int> nums, int n){
     int k = 0;
     int i = 0;
     int j = 0;
-    int n = nums.size();
     for(; j < n; j++){
         if(j == n - 1 && j - i > 1){
             nums[k] = nums[i];
@@ -41,10 +62,29 @@ int main(){
         nums[k++] = nums[i];
     }
 
-    cout<<"i : "<<i<<endl<<"j : "<<j<<endl<<"k : "<<k<<endl;
-    cout<<"Array Elements : ";
+    cout<<"Elements : "<<i<<endl;
+    cout<<"Array : ";
 
     for(int i = 0; i < k; i++){
         cout<<nums[i]<<" ";
     }
+}
+
+int main(){
+
+    vector<int> nums = {0,0,1,1,1,1,2,3,3};
+    int n = nums.size();
+
+    cout<<"Array : "<<endl;
+    for(int i = 0; i < n; i++){
+        cout<<nums[i]<<" ";
+    }
+    cout<<endl<<endl;
+
+    cout<<"Brute Force : "<<endl;
+    bruteForce(nums, n);
+    cout<<endl<<endl;
+
+    cout<<"Optimal : "<<endl;
+    optimal(nums, n);
 }

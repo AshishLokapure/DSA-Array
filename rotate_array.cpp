@@ -9,7 +9,7 @@ void rotatedByOne(vector<int> nums, int k){
     for(int i = 0; i < nums.size(); i++){
         if(i == nums.size() - 1){
             nums[i] = temp;
-        } else{
+        } else {
             nums[i] = nums[i+1];
         }
     }
