@@ -13,7 +13,6 @@ void bruteForce(vector<int> nums, int n){
                 currProduct *= nums[k];
             }
             maxProduct = max(maxProduct, currProduct);
-
         }
     }
     cout<<maxProduct;

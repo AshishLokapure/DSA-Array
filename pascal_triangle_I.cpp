@@ -13,14 +13,14 @@ void findNCR(int n, int r){
     cout<<"Element at row : "<<n+1<<" and col : "<<r+1<<" is : "<<res;
 }
 
-void findRow(int n){
+void findRowOptimal(int n){
     int ans = 1;
     cout<<ans<<" ";
     for(int i = 1; i < n; i++){
         ans = ans * (n - i);
         ans = ans / i;
         cout<<ans<<" ";
-    }3
+    }
 }
 int main(){
     // Q1. given row and col return the element appears there
@@ -31,5 +31,5 @@ int main(){
 
     // Q2. print row when row number is given
     int n = 6;
-    findRow(n);
+    findRowBrute(n);
 }
